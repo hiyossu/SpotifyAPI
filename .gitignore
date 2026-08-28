@@ -2,4 +2,5 @@
 .venv/
 cache
 .cache
-.cache-*
+.cache-*    
+__pycache__/
