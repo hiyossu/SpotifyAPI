@@ -1,6 +1,6 @@
 from client import sp
 
-keywords = ['sex', 'sensual', 'intimacy', 'bedroom', 'late night']
+keywords = ['workout', 'sensual', 'intimacy', 'bedroom', 'late night']
 all_playlists = []
 
 print("Starting extraction...\n")
@@ -20,3 +20,4 @@ for keyword in keywords:
 print("\n--- Combined Contextual Results ---")
 for idx, playlist in enumerate(all_playlists):
     print(f"{idx + 1}. {playlist}")
+
