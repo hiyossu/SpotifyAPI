@@ -1,23 +1,43 @@
+import time
 from client import sp
 
-keywords = ['workout', 'sensual', 'intimacy', 'bedroom', 'late night']
+keywords = ['sensual', 'intimacy', 'bedroom', 'late night']
 all_playlists = []
 
-print("Starting extraction...\n")
+target_per_keyword = 100 
+limit_per_request = 30  
+
+print("Starting bulk extraction...\n")
 
 for keyword in keywords:
-    print(f"Fetching playlists for keyword: '{keyword}'...")
-    results = sp.search(q=keyword, type='playlist', limit=5) 
+    print(f"\n--- Fetching up to {target_per_keyword} playlists for: '{keyword}' ---")
     
-    for item in results['playlists']['items']:
-        if item:
-            playlist_name = item['name']
-            owner = item['owner']['display_name']
-            playlist_id = item['id']
+    offset = 0
+    fetched_count = 0
+    
+    while fetched_count < target_per_keyword:
+        print(f"Requesting offset {offset}...")
+        
+        results = sp.search(q=keyword, type='playlist', limit=limit_per_request, offset=offset)
+        items = results['playlists']['items']
+        
+        if not items:
+            print("No more playlists found for this keyword.")
+            break
             
-            all_playlists.append(f"{playlist_name} (Created by {owner}) - ID: {playlist_id}")
+        for item in items:
+            if item:
+                playlist_name = item['name']
+                owner = item['owner']['display_name']
+                playlist_id = item['id']
+                all_playlists.append(f"[{keyword}] {playlist_name} - ID: {playlist_id}")
+                fetched_count += 1
+                
+                if fetched_count >= target_per_keyword:
+                    break
+        
+        offset += limit_per_request
+        time.sleep(2)
 
-print("\n--- Combined Contextual Results ---")
-for idx, playlist in enumerate(all_playlists):
-    print(f"{idx + 1}. {playlist}")
-
+print("\n=== EXTRACTION COMPLETE ===")
+print(f"Total playlists gathered: {len(all_playlists)}")

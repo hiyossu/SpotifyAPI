@@ -17,4 +17,8 @@ auth_manager = SpotifyClientCredentials(
     client_secret=client_secret
 )
 
-sp = spotipy.Spotify(auth_manager=auth_manager)
+sp = spotipy.Spotify(
+    auth_manager=auth_manager,
+    retries = 5,
+    status_retries = 5
+    )
