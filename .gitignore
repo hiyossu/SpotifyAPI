@@ -4,5 +4,4 @@ cache
 .cache
 .cache-*    
 __pycache__/
-add_to_lib.py
 playlistcsv

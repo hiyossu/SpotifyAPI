@@ -14,7 +14,6 @@ def test():
     except Exception as e:
         print(f"Unexpected Error: {e}")
 
-if __name__ == "__main__":
-    test()
+
 
 
