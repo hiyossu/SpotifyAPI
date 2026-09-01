@@ -1,11 +1,12 @@
 import time
 from client import sp
+import pandas as pd
 
 keywords = ['sensual', 'intimacy', 'bedroom', 'late night']
 all_playlists = []
 
-target_per_keyword = 100 
-limit_per_request = 30  
+target_per_keyword = 40
+limit_per_request = 10  
 
 print("Starting bulk extraction...\n")
 
@@ -27,17 +28,23 @@ for keyword in keywords:
             
         for item in items:
             if item:
-                playlist_name = item['name']
-                owner = item['owner']['display_name']
-                playlist_id = item['id']
-                all_playlists.append(f"[{keyword}] {playlist_name} - ID: {playlist_id}")
+                all_playlists.append({
+                    'Keyword': keyword,
+                    'Playlist Name': item['name'],
+                    'Owner': item['owner']['display_name'],
+                    'Playlist ID': item['id']
+                })
                 fetched_count += 1
                 
                 if fetched_count >= target_per_keyword:
                     break
         
         offset += limit_per_request
-        time.sleep(2)
+        time.sleep(2)   
 
 print("\n=== EXTRACTION COMPLETE ===")
 print(f"Total playlists gathered: {len(all_playlists)}")
+
+
+df = pd.DataFrame(all_playlists)
+df.to_csv("data/extracted_playlists.csv", index=False)
