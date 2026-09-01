@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-import logging
 
 load_dotenv()
 
@@ -17,7 +16,7 @@ auth_manager = SpotifyOAuth(
     client_id=client_id,
     client_secret=client_secret,
     redirect_uri=redirect_uri,
-    scope="playlist-read-private" 
+    scope="playlist-modify-public playlist-modify-private user-library-modify"
 )
 
 sp = spotipy.Spotify(
