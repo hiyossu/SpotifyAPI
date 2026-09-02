@@ -3,7 +3,7 @@ from client import sp
 import pandas as pd
 
 def search():
-    keywords = ['sensual', 'intimacy', 'bedroom', 'late night']
+    keywords = ['sensual', 'intimacy', 'bedroom', 'late night', 'freaky', 'bembang']
     all_playlists = []
 
     target_per_keyword = 40

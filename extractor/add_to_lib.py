@@ -6,7 +6,7 @@ def add_to_lib():
     df = pd.read_csv('data/extracted_playlists.csv')
     for playlist_id in df['Playlist ID']:
         try:
-            time.sleep(0.5)
+            time.sleep(2)
             sp._put(f"playlists/{playlist_id}/followers")
             print(f"added playlist {playlist_id}")
             
@@ -19,9 +19,9 @@ def del_from_lib():
     df = pd.read_csv('data/extracted_playlists.csv')
     for playlist_id in df['Playlist ID']:
         try:
-            time.sleep(0.5)
+            time.sleep(2)
             sp._delete(f"playlists/{playlist_id}/followers")
-            print(f"removing playlist playlist {playlist_id}")
+            print(f"removing playlist {playlist_id}")
             
         except Exception as e:
             print(f"Error deleting {playlist_id}: {e}")
