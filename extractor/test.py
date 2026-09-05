@@ -15,5 +15,5 @@ def test():
         print(f"Unexpected Error: {e}")
 
 
-
+test()
 

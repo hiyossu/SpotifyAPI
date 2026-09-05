@@ -6,13 +6,11 @@ from extractor.playlist_manager import process_playlist
 from extractor.export import export_tracks
 
 def run_pipeline():
-    test()
-    search()
     add_to_lib()
-    export_tracks()
-    process_playlist
+
 
     
 
 if __name__ == '__main__':
-    run_pipeline()
+    process_playlist()
+
